@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Test Mode</title>
+		<meta charset="utf-8" />
+		<script src="Gearics0.0.12.js"></script>
+		<script>
+			$(document).on('DOMContentLoaded', function() {
+				$('body').style({
+					background : 'black',
+					margin : '6px 13px'
+				});
+				$.iterate(function() {
+					$(document.createElement('div')).appendTo(document.body);
+				}, 266);
+				$('div').style({
+					cssFloat : 'left',
+					height : '33px',
+					width : '33px',
+					backgroundColor : 'black',
+					boxShadow : 'inset 0 0 5px black',
+					borderRadius : '50%'
+				})
+				var animation = function(i) {
+					$('div')[i].animate({
+						backgroundColor : '#' + Math.round(Math.random() * 0xFFFFFF).toString(16)
+					}, 2000).on('done', function() {
+						$(this).animate({
+							backgroundColor : 'black'
+						}, 1000).on('done', function() {
+							$(null).animate(null, Math.random() * 1000).on('done', function() {
+								animation(i);
+							});
+						});
+					});
+				};
+				$('div').each(function(i) {
+					animation(i);
+				});
+			});
+		</script>
+	</head>
+	<body></body>
+</html>
