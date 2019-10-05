@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Test Mode</title>
+		<meta charset="utf-8" />
+		<meta name="description" content="" />
+		<meta name="author" content="" />
+		<script src="Gearics0.0.12.js"></script>
+		<script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+		<script src="http://benchmarkjs.com/_js/benchmark.js"></script>
+	</head>
+	<body>
+		<div></div>
+		<script>
+		console.log($('div'))
+			Gearics('div').style({
+				transform : 'rotateZ(0deg)',
+				height : '100px',
+				backgroundColor : 'red'
+			}).animate({
+				transform : 'rotateZ(90deg)'
+			}, 1000).on('done', function() {
+				Gearics(this).animate({
+					transform : 'rotateZ(180deg)'
+				}, 1000).on('done', function() {
+					Gearics(this).animate({
+						transform : 'rotateZ(270deg)'
+					}, 1000).on('done', function() {
+						Gearics(this).animate({
+							transform : 'rotateZ(360deg)'
+						}, 1000).on('done', function() {
+							Gearics(this).style('transform', 'rotateZ(0deg)');
+							console.log(Gearics(this).style('transform'));
+						})
+					});
+				});
+			});
+		</script>
+		<script>
+			window.onload = function() {
+				return false;
+				var suite = new Benchmark.Suite;
+				suite.add('Gearics', function() {
+					new Gearics('div').style({
+						backgroundColor : 'black'
+					});
+				}).add('JQuery', function() {
+					$('div').css({
+						backgroundColor : 'black'
+					});
+				}).on('cycle', function(event) {
+					console.log(String(event.target));
+				}).on('complete', function() {
+					console.log('Fastest is ' + this.filter('fastest').pluck('name'));
+				}).run({
+					'async' : true
+				});
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Test Mode</title>
+		<meta charset="utf-8" />
+		<meta name="description" content="" />
+		<meta name="author" content="" />
+		<script src="Gearics.js"></script>
+		<script src="Gearics0.0.3.js"></script>
+		<script>
+			window.onload = function() {
+
+				$.style(document.querySelector('#ele1'), {
+					width : '100px',
+					height : '100px',
+					background : 'red',
+					position : 'relative'
+				})
+
+				$.on(document.querySelector('#ele1'), 'mouseenter', function() {
+					$.animate(this, 250, {
+						width : '+=20px'
+					});
+				});
+
+				$.on(document.querySelector('#ele1'), 'click', function() {
+					$.off(this, 'mouseenter');
+				});
+
+				var ele1 = document.querySelector('#ele1');
+
+				$.each(document.querySelectorAll('div'), function() {
+					this.style.background = 'black';
+				})
+
+				document.querySelector('#ele2').addEventListener('click', function() {
+					$.fullscreen(this, true);
+				});
+
+				document.documentElement.addEventListener('dblclick', function() {
+					$.fullscreen();
+				});
+
+				$.ajax('Sample.html', null, {
+					load : function() {
+						console.log(this);
+					}
+				});
+
+				$.dataset(document.documentElement).onclick = function() {
+					alert('hi');
+				};
+
+				$.on(document.querySelector('#bn1'), 'click', function() {
+					$('div').style({
+						'outline' : '1px solid red'
+					});
+				});
+
+
+				$('#ele1').attr({
+					'title' : 'hihihi'
+				});
+
+				$('#ele6').on('click', function() {
+					$(this).style({
+						transform : {
+							rotateZ : '+=10deg'
+						}
+					}).style({
+						height : function() {
+							return (parseFloat(this) || 10) * 2 + 'px';
+						}
+					});
+				}).on('mouseenter', function() {
+					$(this).style({
+						transform : {
+							translateX : '+=10px'
+						}
+					});
+				});
+
+				$('div').$(function() {
+					if ($(this).html().trim() == '') {
+						$(this).html('ABC');
+					}
+				});
+
+				$.animate(null, 1000, function(prog) {
+					window.scrollTo(0, 100 * prog);
+				});
+
+				$('#btnAnim').on('click', function() {
+					$('#divAnim').animate(250, {
+						padding : '100px',
+						marginTop : '20px'
+					}, {
+						complete : function() {
+							$(this).style({
+								borderTop : '1px solid red'
+							}).animate(750, {
+								borderTopWidth : '40px'
+							}, {
+								complete : function() {
+									$(this).animate(750, {
+										borderTopWidth : '0'
+									});
+								}
+							});
+						}
+					});
+				});
+
+				$('#div1').style({
+					width : '50px',
+					height : '50px',
+					background : 'red'
+				});
+				$('#div2').style({
+					margin : '50px',
+					width : '50px',
+					height : '50px',
+					background : 'red'
+				});
+
+				$('#btn3').on('click', function() {
+					$({
+						background : 'green'
+					}).by($('#div1').$(function() {
+						return this;
+					}), $.style);
+				});
+
+				$('#div1').style({
+					position : 'absolute'
+				}).draggable();
+
+				$('p').on('click', function() {
+					var start = new Date();
+					var rsl = [];
+					for (var i = 0; i < 10000; i++) {
+						this.style.color = 'hsla(245,100%,50%,1)';
+						rsl.push(getComputedStyle(this).color);
+					}
+					console.log('DOM:' + (new Date() - start));
+					console.log(rsl);
+					var start = new Date();
+					var rsl = [];
+					for (var i = 0; i < 10000; i++) {
+						rsl.push($2.color3('hsla(245,100%,50%,1)'));
+					}
+					console.log('DOM:' + (new Date() - start));
+					console.log(rsl);
+				});
+			}
+		</script>
+	</head>
+	<body>
+		<p style="padding:10px;width:0;height:0;">
+			123
+		</p>
+		<div id="ele1">
+
+		</div>
+		<div id="ele2">
+			<input />
+		</div>
+		<div id="ele3">
+
+		</div>
+		<div id="ele4">
+			<button onclick="$(this).style({background:'red'})">
+				Change
+			</button>
+		</div>
+		<div id="ele5">
+			<button id="bn1">
+				Change
+			</button>
+		</div>
+		<div id="ele6">
+
+		</div>
+		<button onclick="console.log($(this).getStyle({width:'+=100%',height:'3em'})[0])">
+			Console
+		</button>
+		<div style="display:inline-block;padding:40px;" id="divAnim">
+
+		</div>
+		<button id="btnAnim">
+			Animate
+		</button>
+		<br />
+		<div id="div1"></div>
+		<div id="div2"></div>
+		<button id="btn3">
+			Change color
+		</button>
+		<span style="background:calc(#fff + #000);">123</span>
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+	</body>
+</html>
